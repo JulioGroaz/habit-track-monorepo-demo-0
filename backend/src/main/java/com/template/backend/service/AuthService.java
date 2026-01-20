@@ -11,9 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-/**
- * Authentication and registration business logic.
- */
+/** Authentication and registration business logic. */
 @Service
 public class AuthService {
 
@@ -22,9 +20,7 @@ public class AuthService {
   private final JwtService jwtService;
 
   public AuthService(
-      UserRepository userRepository,
-      PasswordEncoder passwordEncoder,
-      JwtService jwtService) {
+      UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
     this.jwtService = jwtService;
@@ -43,8 +39,11 @@ public class AuthService {
   }
 
   public AuthResponse login(LoginRequest request) {
-    User user = userRepository.findByEmail(request.email())
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials"));
+    User user =
+        userRepository
+            .findByEmail(request.email())
+            .orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials"));
 
     // Use the encoder to avoid timing leaks and keep hash format consistent.
     if (!passwordEncoder.matches(request.password(), user.getPassword())) {

@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-/**
- * JWT utilities for issuing and validating tokens.
- */
+/** JWT utilities for issuing and validating tokens. */
 @Service
 public class JwtService {
 
@@ -53,11 +51,8 @@ public class JwtService {
   }
 
   private <T> T extractClaim(String token, Function<Claims, T> resolver) {
-    Claims claims = Jwts.parserBuilder()
-        .setSigningKey(getSigningKey())
-        .build()
-        .parseClaimsJws(token)
-        .getBody();
+    Claims claims =
+        Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
     return resolver.apply(claims);
   }
 

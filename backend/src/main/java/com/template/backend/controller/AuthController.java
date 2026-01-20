@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Authentication endpoints: register, login, and the current authenticated user.
- */
+/** Authentication endpoints: register, login, and the current authenticated user. */
 @RestController
 @RequestMapping("/api")
 public class AuthController {
@@ -27,25 +25,19 @@ public class AuthController {
     this.authService = authService;
   }
 
-  /**
-   * Registers a new user and returns a JWT for immediate use.
-   */
+  /** Registers a new user and returns a JWT for immediate use. */
   @PostMapping("/auth/register")
   public AuthResponse register(@Valid @RequestBody RegisterRequest request) {
     return authService.register(request);
   }
 
-  /**
-   * Authenticates a user and returns a JWT if credentials are valid.
-   */
+  /** Authenticates a user and returns a JWT if credentials are valid. */
   @PostMapping("/auth/login")
   public AuthResponse login(@Valid @RequestBody LoginRequest request) {
     return authService.login(request);
   }
 
-  /**
-   * Returns the authenticated user's public profile.
-   */
+  /** Returns the authenticated user's public profile. */
   @GetMapping("/me")
   public UserResponse me(@AuthenticationPrincipal User user) {
     return new UserResponse(user.getId(), user.getEmail());

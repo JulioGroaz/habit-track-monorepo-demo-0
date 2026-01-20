@@ -16,9 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-/**
- * User entity and Spring Security principal.
- */
+/** User entity and Spring Security principal. */
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -40,8 +38,7 @@ public class User implements UserDetails {
   @Column(name = "updated_at", nullable = false)
   private Instant updatedAt;
 
-  public User() {
-  }
+  public User() {}
 
   public User(String email, String passwordHash) {
     this.email = email;

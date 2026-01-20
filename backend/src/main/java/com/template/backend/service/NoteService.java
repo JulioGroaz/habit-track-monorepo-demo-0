@@ -8,9 +8,7 @@ import com.template.backend.repository.NoteRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
-/**
- * Note operations scoped to the authenticated user.
- */
+/** Note operations scoped to the authenticated user. */
 @Service
 public class NoteService {
 
@@ -34,8 +32,10 @@ public class NoteService {
 
   public Note updateNote(User user, Long id, NoteRequest request) {
     // Ensure the note belongs to the current user.
-    Note note = noteRepository.findByIdAndOwner(id, user)
-        .orElseThrow(() -> new ResourceNotFoundException("Note not found"));
+    Note note =
+        noteRepository
+            .findByIdAndOwner(id, user)
+            .orElseThrow(() -> new ResourceNotFoundException("Note not found"));
     note.setTitle(request.title());
     note.setContent(request.content());
     return noteRepository.save(note);
@@ -43,8 +43,10 @@ public class NoteService {
 
   public void deleteNote(User user, Long id) {
     // Ensure the note belongs to the current user.
-    Note note = noteRepository.findByIdAndOwner(id, user)
-        .orElseThrow(() -> new ResourceNotFoundException("Note not found"));
+    Note note =
+        noteRepository
+            .findByIdAndOwner(id, user)
+            .orElseThrow(() -> new ResourceNotFoundException("Note not found"));
     noteRepository.delete(note);
   }
 }

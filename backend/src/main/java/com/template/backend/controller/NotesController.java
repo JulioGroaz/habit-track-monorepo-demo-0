@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * CRUD endpoints for notes scoped to the authenticated user.
- */
+/** CRUD endpoints for notes scoped to the authenticated user. */
 @RestController
 @RequestMapping("/api/notes")
 public class NotesController {
@@ -30,27 +28,20 @@ public class NotesController {
     this.noteService = noteService;
   }
 
-  /**
-   * Lists notes owned by the authenticated user.
-   */
+  /** Lists notes owned by the authenticated user. */
   @GetMapping
   public List<NoteResponse> list(@AuthenticationPrincipal User user) {
     return noteService.getNotes(user).stream().map(NoteResponse::from).toList();
   }
 
-  /**
-   * Creates a new note for the authenticated user.
-   */
+  /** Creates a new note for the authenticated user. */
   @PostMapping
   public NoteResponse create(
-      @AuthenticationPrincipal User user,
-      @Valid @RequestBody NoteRequest request) {
+      @AuthenticationPrincipal User user, @Valid @RequestBody NoteRequest request) {
     return NoteResponse.from(noteService.createNote(user, request));
   }
 
-  /**
-   * Updates a note owned by the authenticated user.
-   */
+  /** Updates a note owned by the authenticated user. */
   @PutMapping("/{id}")
   public NoteResponse update(
       @AuthenticationPrincipal User user,
@@ -59,13 +50,9 @@ public class NotesController {
     return NoteResponse.from(noteService.updateNote(user, id, request));
   }
 
-  /**
-   * Deletes a note owned by the authenticated user.
-   */
+  /** Deletes a note owned by the authenticated user. */
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(
-      @AuthenticationPrincipal User user,
-      @PathVariable Long id) {
+  public ResponseEntity<Void> delete(@AuthenticationPrincipal User user, @PathVariable Long id) {
     noteService.deleteNote(user, id);
     return ResponseEntity.noContent().build();
   }

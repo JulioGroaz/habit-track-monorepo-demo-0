@@ -13,9 +13,7 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import java.time.Instant;
 
-/**
- * Note entity owned by a user.
- */
+/** Note entity owned by a user. */
 @Entity
 @Table(name = "notes")
 public class Note {
@@ -40,8 +38,7 @@ public class Note {
   @Column(name = "updated_at", nullable = false)
   private Instant updatedAt;
 
-  public Note() {
-  }
+  public Note() {}
 
   @PrePersist
   void onCreate() {

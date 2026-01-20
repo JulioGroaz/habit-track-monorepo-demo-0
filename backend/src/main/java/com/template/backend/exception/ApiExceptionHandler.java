@@ -10,15 +10,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
-/**
- * Centralized error mapping to ProblemDetail responses.
- */
+/** Centralized error mapping to ProblemDetail responses. */
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
-  /**
-   * Translates bean validation errors into a structured map.
-   */
+  /** Translates bean validation errors into a structured map. */
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ProblemDetail handleValidation(MethodArgumentNotValidException ex) {
     ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
@@ -33,9 +29,7 @@ public class ApiExceptionHandler {
     return problemDetail;
   }
 
-  /**
-   * Not found errors for missing resources.
-   */
+  /** Not found errors for missing resources. */
   @ExceptionHandler(ResourceNotFoundException.class)
   public ProblemDetail handleNotFound(ResourceNotFoundException ex) {
     ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
@@ -44,9 +38,7 @@ public class ApiExceptionHandler {
     return problemDetail;
   }
 
-  /**
-   * Converts ResponseStatusException into ProblemDetail while keeping the status.
-   */
+  /** Converts ResponseStatusException into ProblemDetail while keeping the status. */
   @ExceptionHandler(ResponseStatusException.class)
   public ProblemDetail handleResponseStatus(ResponseStatusException ex) {
     ProblemDetail problemDetail = ProblemDetail.forStatus(ex.getStatusCode());
@@ -58,9 +50,7 @@ public class ApiExceptionHandler {
     return problemDetail;
   }
 
-  /**
-   * Fallback for unexpected failures.
-   */
+  /** Fallback for unexpected failures. */
   @ExceptionHandler(Exception.class)
   public ProblemDetail handleGeneric(Exception ex) {
     ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);

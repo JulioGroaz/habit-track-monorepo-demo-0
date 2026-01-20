@@ -17,11 +17,9 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 class NoteServiceTest {
 
-  @Autowired
-  private NoteService noteService;
+  @Autowired private NoteService noteService;
 
-  @Autowired
-  private UserRepository userRepository;
+  @Autowired private UserRepository userRepository;
 
   @Test
   void createUpdateDeleteNote() {
