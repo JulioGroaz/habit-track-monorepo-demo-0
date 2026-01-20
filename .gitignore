@@ -1,0 +1,28 @@
+# Java / Maven
+/backend/target/
+/backend/.classpath
+/backend/.project
+/backend/.settings/
+/backend/.idea/
+*.iml
+
+# Flutter / Dart
+/mobile/.dart_tool/
+/mobile/.packages
+/mobile/.pub-cache/
+/mobile/build/
+/mobile/ios/Pods/
+/mobile/ios/Runner.xcworkspace/
+/mobile/android/.gradle/
+/mobile/android/local.properties
+/mobile/android/key.properties
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/*.log
+
+# Env
+**/.env
+**/.env.*
+!**/.env.example
