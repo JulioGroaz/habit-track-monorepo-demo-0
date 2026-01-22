@@ -1,23 +1,23 @@
+// Root application widget that wires theme, routing, and global UI behavior.
+// This exists to keep MaterialApp configuration in one place for clarity.
+// It fits in the app by composing the theme system and navigation tree.
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'routing/app_router.dart';
+import 'core/theme/app_theme.dart';
+import 'presentation/routing/app_router.dart';
 
-/// Root application widget wiring theme and router.
-class TemplateApp extends ConsumerWidget {
-  const TemplateApp({super.key});
+class FocusFlowApp extends ConsumerWidget {
+  const FocusFlowApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
 
     return MaterialApp.router(
-      title: 'Template App',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
-      ),
-      darkTheme: ThemeData.dark(useMaterial3: true),
+      title: 'FocusFlow',
+      theme: AppTheme.lightTheme(),
+      darkTheme: AppTheme.darkTheme(),
       routerConfig: router,
     );
   }

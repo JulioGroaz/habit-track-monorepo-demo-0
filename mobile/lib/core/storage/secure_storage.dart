@@ -1,6 +1,8 @@
+// Secure token storage wrapper so auth secrets stay off disk and out of logs.
+// This exists to isolate secure storage usage behind a simple interface.
+// It fits in the app by backing auth persistence and ApiClient token injection.
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-/// Simple wrapper around secure storage for JWT persistence.
 class TokenStorage {
   TokenStorage(this._storage);
 
